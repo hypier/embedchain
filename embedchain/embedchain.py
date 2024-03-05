@@ -377,15 +377,22 @@ class EmbedChain(JSONSerializable):
 
         # Chunk documents into batches of 2048 and handle each batch
         # helps wigth large loads of embeddings  that hit OpenAI limits
-        document_batches = [documents[i : i + 2048] for i in range(0, len(documents), 2048)]
-        for batch in document_batches:
+        # 假设 documents, metadatas, ids 都是列表且长度相同
+        document_batches = [documents[i: i + 2048] for i in range(0, len(documents), 2048)]
+        metadatas_batches = [metadatas[i: i + 2048] for i in range(0, len(metadatas), 2048)]
+        ids_batches = [ids[i: i + 2048] for i in range(0, len(ids), 2048)]
+
+        # 确保对每个批次进行迭代处理
+        for i in range(len(document_batches)):
             try:
-                # Add only valid batches
-                if batch:
-                    self.db.add(documents=batch, metadatas=metadatas, ids=ids, **kwargs)
+                # 检查当前批次是否有效
+                if document_batches[i]:
+                    # 注意这里我们传递的是metadatas_batches[i]和ids_batches[i]来确保对齐
+                    self.db.add(documents=document_batches[i], metadatas=metadatas_batches[i], ids=ids_batches[i],
+                                **kwargs)
             except Exception as e:
                 print(f"Failed to add batch due to a bad request: {e}")
-                # Handle the error, e.g., by logging, retrying, or skipping
+                # 处理错误，例如通过记录、重试或跳过
                 pass
 
         count_new_chunks = self.db.count() - chunks_before_addition
