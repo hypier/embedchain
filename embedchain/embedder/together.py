@@ -11,7 +11,7 @@ class TogetherEmbedder(BaseEmbedder):
     def __init__(self, config: Optional[BaseEmbedderConfig] = None):
         super().__init__(config=config)
 
-        embeddings = TogetherEmbeddings(model_name=self.config.model)
+        embeddings = TogetherEmbeddings(model=self.config.model)
         embedding_fn = BaseEmbedder._langchain_default_concept(embeddings)
         self.set_embedding_fn(embedding_fn=embedding_fn)
 
