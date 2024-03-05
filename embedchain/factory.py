@@ -51,6 +51,7 @@ class EmbedderFactory:
         "azure_openai": "embedchain.embedder.openai.OpenAIEmbedder",
         "gpt4all": "embedchain.embedder.gpt4all.GPT4AllEmbedder",
         "huggingface": "embedchain.embedder.huggingface.HuggingFaceEmbedder",
+        "together": "embedchain.embedder.together.TogetherEmbedder",
         "openai": "embedchain.embedder.openai.OpenAIEmbedder",
         "vertexai": "embedchain.embedder.vertexai.VertexAIEmbedder",
         "google": "embedchain.embedder.google.GoogleAIEmbedder",
@@ -62,6 +63,7 @@ class EmbedderFactory:
         "google": "embedchain.config.embedder.google.GoogleAIEmbedderConfig",
         "gpt4all": "embedchain.config.embedder.base.BaseEmbedderConfig",
         "huggingface": "embedchain.config.embedder.base.BaseEmbedderConfig",
+        "together": "embedchain.config.embedder.base.BaseEmbedderConfig",
         "openai": "embedchain.config.embedder.base.BaseEmbedderConfig",
     }
 
